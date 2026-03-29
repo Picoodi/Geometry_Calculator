@@ -1,12 +1,13 @@
 package math.functions;
 
+import math.classes.Plane;
 import math.classes.Point;
 
 import java.util.Objects;
 
 public class Point_Functions {
 
-    public static Point mirror_point(String mirror, Point point, Point mirror_point){
+    public static Point mirror_point(String mirror, Point point, Point mirror_point, Plane mirror_plane){
         // we check which plane it is and change the coordinates accordingly
         // For origin ist the mirror then every coordinate times -1
         if (Objects.equals(mirror, "o")){

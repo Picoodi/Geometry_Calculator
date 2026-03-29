@@ -2,11 +2,32 @@ package math.functions;
 
 import math.classes.Line;
 import math.classes.Plane;
+import math.classes.Point;
 import math.classes.Vector;
 
 public class Plane_Functions {
 
-    //public static Point Point_of_intersection(Line Lot, Plane Plane){}
+    public static boolean Point_in_Plane(Point point, Plane plane){
+        if (plane.normal_vector == null){
+            plane.create_normal_form();
+        }
+        double eq = (plane.normal_vector.x * point.x) + (plane.normal_vector.y * point.y) + (plane.normal_vector.z * point.z) - plane.constant;
+
+        return eq == 0;
+    }
+
+    public static boolean Line_parallel_Plane(Line line, Plane plane){
+        if (plane.normal_vector == null){
+            plane.create_normal_form();
+        }
+
+        return 0 == Vector_Functions.scalar_product(plane.normal_vector, line.direction_vector);
+    }
+
+    public static boolean Line_in_Plane(Line line, Plane plane){
+        return Point_in_Plane(new Point(line.support_vector.x, line.support_vector.y, line.support_vector.z), plane) && Line_parallel_Plane(line, plane);
+    }
+
 
     public static Line Line_of_intersection(Plane E, Plane F){
         double a = E.normal_vector.x;
